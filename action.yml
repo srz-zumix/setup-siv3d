@@ -30,7 +30,8 @@ runs:
       env:
         INPUTS_VERSION: ${{ steps.resolve.outputs.version }}
       run: |
-        "${GITHUB_ACTION_PATH}/install.sh"
+        "${GITHUB_ACTION_PATH}/install-macos.sh"
+      if: runner.os == 'macOS'
     - uses: actions/cache/save@v4
       with:
         path: |
