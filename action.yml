@@ -25,7 +25,7 @@ runs:
     - uses: actions/cache/restore@v4
       with:
         path: |
-          ${{ steps.resolve.outputs.path }}
+          ${{ steps.resolve.outputs.install-path }}
         key: ${{ runner.os }}-siv3d-${{ steps.resolve.outputs.version }}
     - name: Install siv3d
       shell: bash
@@ -38,7 +38,7 @@ runs:
     - uses: actions/cache/save@v4
       with:
         path: |
-          ${{ steps.resolve.outputs.path }}
+          ${{ steps.resolve.outputs.install-path }}
         key: ${{ runner.os }}-siv3d-${{ steps.resolve.outputs.version }}
 
 branding:
