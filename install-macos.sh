@@ -5,6 +5,8 @@ source "${GITHUB_ACTION_PATH:-.}/resolve.sh"
 
 mkdir -p "${SIV3D_INSTALLDIR}"
 
+SIV3D=${SIV3D_INSTALLDIR}/siv3d_${INPUTS_VERSION}_macOS
+
 download() {
   echo '::group::📖 Download siv3d ...'
   curl -sSL -o "${SIV3D_TEMPDIR}/siv3d_${INPUTS_VERSION}_macOS.zip" "https://siv3d.jp/downloads/Siv3D/siv3d_${INPUTS_VERSION}_macOS.zip"
@@ -15,7 +17,7 @@ download() {
 }
 
 install() {
-  if [ ! -f "${SIV3D_INSTALLDIR}/siv3d_${INPUTS_VERSION}_macOS/lib/macos/libSiv3D.a" ]; then
+  if [ ! -f "${SIV3D}/lib/macos/libSiv3D.a" ]; then
     download
   fi
 }
@@ -23,7 +25,7 @@ install() {
 install
 
 {
-  echo "SIV3D=${SIV3D_INSTALLDIR}/siv3d_${INPUTS_VERSION}_macOS"
+  echo "SIV3D=${SIV3D}"
   echo "CPATH=${CPATH:-}:${SIV3D}/include:${SIV3D}/include/ThirdParty"
   echo "LIBRARY_PATH=${LIBRARY_PATH:-}:${SIV3D}/lib/macos"
   echo "LIBRARY_PATH=${LIBRARY_PATH:-}:${SIV3D}/lib/macOS/boost"
