@@ -34,4 +34,4 @@ fi
 
 SIV3D_INSTALLDIR="${RUNNER_TOOL_CACHE:-${SIV3D_TEMPDIR}}/siv3d/${VERSION}"
 
-echo "path=${SIV3D_INSTALLDIR}" | tee -a "${GITHUB_OUTPUT:-/dev/null}"
+echo "root-path=${SIV3D_INSTALLDIR}" | tee -a "${GITHUB_OUTPUT:-/dev/null}"

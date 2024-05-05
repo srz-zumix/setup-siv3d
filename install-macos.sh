@@ -43,3 +43,4 @@ install
   echo "LIBRARY_PATH=${LIBRARY_PATH:-}:${SIV3D}/lib/macOS/zlib"
 } >> "${GITHUB_ENV:-/dev/null}"
 
+echo "path=${SIV3D}" | tee -a "${GITHUB_OUTPUT:-/dev/null}"

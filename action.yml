@@ -8,6 +8,9 @@ outputs:
   version:
     description: 'installed siv3d version'
     value: ${{ steps.install.outputs.version }}
+  path:
+    description: 'installed siv3d path'
+    value: ${{ steps.install.outputs.path }}
 
 runs:
   using: 'composite'
