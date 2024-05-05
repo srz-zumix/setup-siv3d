@@ -1,0 +1,43 @@
+name: 'Setup Siv3D'
+description: 'This action sets up Siv3D'
+inputs:
+  version:
+    description: 'siv3d version. [latest,vX.Y.Z]'
+    default: 'latest'
+outputs:
+  version:
+    description: 'installed siv3d version'
+    value: ${{ steps.install.outputs.version }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Resolve version
+      shell: bash
+      id: resolve
+      env:
+        INPUTS_VERSION: ${{ inputs.version }}
+      run: |
+        "${GITHUB_ACTION_PATH}/resolve.sh"
+    - uses: actions/cache/restore@v4
+      with:
+        path: |
+          ${{ steps.resolve.outputs.path }}
+        key: ${{ runner.os }}-siv3d-${{ steps.resolve.outputs.version }}
+    - name: Install siv3d
+      shell: bash
+      id: install
+      env:
+        INPUTS_VERSION: ${{ steps.resolve.outputs.version }}
+      run: |
+        "${GITHUB_ACTION_PATH}/install-macos.sh"
+      if: runner.os == 'macOS'
+    - uses: actions/cache/save@v4
+      with:
+        path: |
+          ${{ steps.resolve.outputs.path }}
+        key: ${{ runner.os }}-siv3d-${{ steps.resolve.outputs.version }}
+
+branding:
+  icon: 'book'
+  color: 'blue'
