@@ -23,3 +23,5 @@ install() {
 install
 
 echo "SIV3D=${SIV3D_INSTALLDIR}/siv3d_${INPUTS_VERSION}_macOS" >> "${GITHUB_ENV:-/dev/null}"
+echo "CPATH=${CPATH}:${SIV3D}/include:${SIV3D}/include/ThirdParty" >> "${GITHUB_ENV:-/dev/null}"
+echo "LIBRARY_PATH=${LIBRARY_PATH}:${SIV3D}/lib/macos" >> "${GITHUB_ENV:-/dev/null}"
