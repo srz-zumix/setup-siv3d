@@ -6,9 +6,8 @@ source "${GITHUB_ACTION_PATH:-.}/resolve.sh"
 mkdir -p "${SIV3D_INSTALLDIR}"
 
 SIV3D=${SIV3D_INSTALLDIR}/siv3d_${INPUTS_VERSION}_macOS
-# shellcheck disable=SC2034
 SIV3D_ENV_VERSION_NUMBER="${INPUTS_VERSION#v}"
-SIV3D_ENV_VERSION_NAME="${SIV3D_ENV_VERSION_NAME//./_}"
+SIV3D_ENV_VERSION_NAME="${SIV3D_ENV_VERSION_NUMBER//./_}"
 
 download() {
   echo '::group::📖 Download siv3d ...'
