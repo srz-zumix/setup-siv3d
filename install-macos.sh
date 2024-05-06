@@ -44,7 +44,7 @@ LIBRARY_PATH="${LIBRARY_PATH:-}:${SIV3D}/lib/macOS/zlib"
 
 {
   echo "SIV3D=${SIV3D}"
-  echo "${SIV3D_ENV_VERSION_NAME}=${SIV3D}"
+  echo "SIV3D_${SIV3D_ENV_VERSION_NAME}=${SIV3D}"
   echo "CPATH=${CPATH:-}"
   echo "LIBRARY_PATH=${LIBRARY_PATH:-}"
 } >> "${GITHUB_ENV:-/dev/null}"
