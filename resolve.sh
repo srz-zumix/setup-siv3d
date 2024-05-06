@@ -4,7 +4,7 @@ set -euo pipefail
 VERSION="${INPUTS_VERSION:-latest}"
 
 versions() {
-  curl -sSL https://api.github.com/repos/Siv3D/OpenSiv3D/tags | jq -r .[].name | sort -V
+  curl -sSL --retry 5 --retry-delay 1 https://api.github.com/repos/Siv3D/OpenSiv3D/tags | jq -r .[].name | sort -V
 }
 
 resolve_version() {
@@ -34,4 +34,4 @@ fi
 
 SIV3D_INSTALLDIR="${RUNNER_TOOL_CACHE:-${SIV3D_TEMPDIR}}/siv3d/${VERSION}"
 
-echo "path=${SIV3D_INSTALLDIR}" | tee -a "${GITHUB_OUTPUT:-/dev/null}"
+echo "install-path=${SIV3D_INSTALLDIR}" | tee -a "${GITHUB_OUTPUT:-/dev/null}"
