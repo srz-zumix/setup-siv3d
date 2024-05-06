@@ -6,6 +6,8 @@ source "${GITHUB_ACTION_PATH:-.}/resolve.sh"
 mkdir -p "${SIV3D_INSTALLDIR}"
 
 SIV3D=${SIV3D_INSTALLDIR}/siv3d_${INPUTS_VERSION}_macOS
+SIV3D_ENV_VERSION_NUMBER="${INPUTS_VERSION#v}"
+SIV3D_ENV_VERSION_NAME="${SIV3D_ENV_VERSION_NAME//./_}"
 
 download() {
   echo '::group::📖 Download siv3d ...'
@@ -42,6 +44,7 @@ LIBRARY_PATH="${LIBRARY_PATH:-}:${SIV3D}/lib/macOS/zlib"
 
 {
   echo "SIV3D=${SIV3D}"
+  echo "${SIV3D_ENV_VERSION_NAME}=${SIV3D}"
   echo "CPATH=${CPATH:-}"
   echo "LIBRARY_PATH=${LIBRARY_PATH:-}"
 } >> "${GITHUB_ENV:-/dev/null}"
