@@ -8,6 +8,10 @@ on:
 env:
   SIV3D_REPO_URL: https://github.com/Siv3D/OpenSiv3D
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   get-siv3d-tags:
     runs-on: ubuntu-latest
