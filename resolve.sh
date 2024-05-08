@@ -4,7 +4,10 @@ set -euo pipefail
 VERSION="${INPUTS_VERSION:-latest}"
 
 versions() {
-  curl -sSL --retry 5 --retry-delay 1 https://api.github.com/repos/Siv3D/OpenSiv3D/tags | jq -r .[].name | sort -V
+  for i in {1..5}; do
+    curl -sSL https://api.github.com/repos/Siv3D/OpenSiv3D/tags | jq -r .[].name | sort -V && break
+    sleep 1
+  done
 }
 
 resolve_version() {
