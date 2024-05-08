@@ -28,6 +28,8 @@ jobs:
     outputs:
       tagname: ${{ steps.create_tagname.outputs.tagname }}
       semver: ${{ steps.create_tagname.outputs.semver }}
+    if: >
+      inputs.ref != 'v0.6.6'
     env:
       INPUTS_REF: ${{ inputs.ref }}
     steps:
