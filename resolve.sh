@@ -6,7 +6,7 @@ VERSION="${INPUTS_VERSION:-latest}"
 versions() {
   for i in {1..5}; do
     curl -sSL https://api.github.com/repos/Siv3D/OpenSiv3D/tags | jq -r .[].name | sort -V && break
-    sleep ((i*5))
+    sleep $((i*5))
   done
 }
 
