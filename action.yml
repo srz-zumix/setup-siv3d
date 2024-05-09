@@ -16,12 +16,13 @@ runs:
   using: 'composite'
   steps:
     - name: Resolve version
-      shell: bash
+      uses: srz-zumix/retry-run-action@v0
       id: resolve
       env:
         INPUTS_VERSION: ${{ inputs.version }}
-      run: |
-        "${GITHUB_ACTION_PATH}/resolve.sh"
+      with:
+        run: |
+          "${GITHUB_ACTION_PATH}/resolve.sh"
     - uses: actions/cache@v4
       with:
         path: |
