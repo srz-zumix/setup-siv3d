@@ -1,0 +1,42 @@
+name: Docker Build Cron
+on:
+  pull_request:
+    paths:
+      - docker/**
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 1'
+
+env:
+  SIV3D_REPO_URL: https://github.com/Siv3D/OpenSiv3D
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  get-siv3d-tags:
+    runs-on: ubuntu-latest
+    outputs:
+      tags: ${{ steps.tags.outputs.json }}
+    steps:
+      - name: List branches
+        id: tags
+        env:
+          BRANCH_LIST_FILE: ${{ runner.temp }}/branch-list.txt
+        run: |
+          git ls-remote --tags "${{ env.SIV3D_REPO_URL }}" | grep 'v[0-9]\.[0-9]*\.[0-9]*$' | cut -f2 | cut -d"/" -f3 >> "${{ env.BRANCH_LIST_FILE }}"
+          TAGS=$(jq -R < "${{ env.BRANCH_LIST_FILE }}" | jq -cs)
+          echo "json=${TAGS}" | tee -a "${GITHUB_OUTPUT}"
+
+  docker-build:
+    uses: ./.github/workflows/reusable-docker-build.yml
+    needs: get-siv3d-tags
+    strategy:
+      fail-fast: false
+      matrix:
+        tag: ${{ fromJson(needs.get-siv3d-tags.outputs.tags) }}
+    with:
+      ref: ${{ matrix.tag }}
+      publish: ${{ github.event_name != 'pull_request' }}
+    secrets: inherit

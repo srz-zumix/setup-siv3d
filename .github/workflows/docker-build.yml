@@ -1,0 +1,19 @@
+name: Docker Build
+on: 
+  pull_request:
+    paths:
+      - docker/**
+    branches:
+      - main
+
+permissions:
+  contents: read
+  packages: write
+  
+jobs:
+  docker-build:
+    uses: ./.github/workflows/reusable-docker-build.yml
+    with:
+      ref: main
+      publish: ${{ github.event_name != 'pull_request' }}
+    secrets: inherit
