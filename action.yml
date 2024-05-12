@@ -38,7 +38,7 @@ runs:
           "${GITHUB_ACTION_PATH}/install-maos.sh"
         fi
         if [ "${{ runner.os }}" = "Linux" ]; then
-          "${GITHUB_ACTION_PATH}/install-linux.sh"
+          INSTALL_PATH=/usr/local "${GITHUB_ACTION_PATH}/install-linux.sh"
         fi
 
 branding:

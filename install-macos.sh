@@ -5,16 +5,16 @@ source "${GITHUB_ACTION_PATH:-.}/resolve.sh"
 
 mkdir -p "${SIV3D_INSTALLDIR}"
 
-SIV3D=${SIV3D_INSTALLDIR}/siv3d_${INPUTS_VERSION}_macOS
-SIV3D_ENV_VERSION_NUMBER="${INPUTS_VERSION#v}"
+SIV3D=${SIV3D_INSTALLDIR}/siv3d_${VERSION}_macOS
+SIV3D_ENV_VERSION_NUMBER="${VERSION#v}"
 SIV3D_ENV_VERSION_NAME="${SIV3D_ENV_VERSION_NUMBER//./_}"
 
 download() {
   echo '::group::📖 Download siv3d ...'
-  curl -sSL -o "${SIV3D_TEMPDIR}/siv3d_${INPUTS_VERSION}_macOS.zip" "https://siv3d.jp/downloads/Siv3D/siv3d_${INPUTS_VERSION}_macOS.zip"
+  curl -sSL -o "${SIV3D_TEMPDIR}/siv3d_${VERSION}_macOS.zip" "https://siv3d.jp/downloads/Siv3D/siv3d_${VERSION}_macOS.zip"
   echo '::endgroup::'
   echo '::group::📖 Unarchive siv3d ...'
-  unzip "${SIV3D_TEMPDIR}/siv3d_${INPUTS_VERSION}_macOS.zip" -d "${SIV3D_INSTALLDIR}"
+  unzip "${SIV3D_TEMPDIR}/siv3d_${VERSION}_macOS.zip" -d "${SIV3D_INSTALLDIR}"
   echo '::endgroup::'
 }
 
