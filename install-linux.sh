@@ -14,10 +14,11 @@ install() {
   echo '::endgroup::'
   echo '::group::📖 Copy Siv3D ...'
   docker run --rm -v "${SIV3D}:/siv3d" --entrypoint bash "${SIV3D_IMAGE}" -c "cp -r /usr/local/lib /siv3d/lib && cp -r /usr/local/include /siv3d/include"
-  ls "${SIV3D}/lib"
-  ls "${SIV3D}/include"
+  ls -l "${SIV3D}/lib"
+  ls -l "${SIV3D}/include"
   sudo chown -R "$(id -u):$(id -g)" "${SIV3D}"
-  cp -r "${SIV3D}" "${INSTALL_PATH}"
+  sudo cp -r "${SIV3D}/lib" "${INSTALL_PATH}"
+  sudo cp -r "${SIV3D}/include" "${INSTALL_PATH}"
   ls "${INSTALL_PATH}/lib"
   ls "${INSTALL_PATH}/include"
   echo '::endgroup::'
