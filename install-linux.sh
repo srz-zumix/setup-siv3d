@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefail
+set -euox pipefail
 
 source "${GITHUB_ACTION_PATH:-.}/resolve.sh"
 
