@@ -42,6 +42,9 @@ runs:
         if [ "${{ runner.os }}" = "Linux" ]; then
           INSTALL_PATH=/usr/local "${GITHUB_ACTION_PATH}/install-linux.sh"
         fi
+        if [ "${{ runner.os }}" = "Windows" ]; then
+          INSTALL_PATH=/usr/local "${GITHUB_ACTION_PATH}/install-windows.sh"
+        fi
 
 branding:
   icon: 'book'
