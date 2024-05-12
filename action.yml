@@ -21,6 +21,8 @@ runs:
       env:
         INPUTS_VERSION: ${{ inputs.version }}
       with:
+        retry: 5
+        interval: 30
         run: |
           "${GITHUB_ACTION_PATH}/resolve.sh"
     - uses: actions/cache@v4
@@ -28,14 +30,18 @@ runs:
         path: |
           ${{ steps.resolve.outputs.install-path }}
         key: ${{ runner.os }}-siv3d-${{ steps.resolve.outputs.version }}
-    - name: Install siv3d
+    - name: Install Siv3D
       shell: bash
       id: install
       env:
         INPUTS_VERSION: ${{ steps.resolve.outputs.version }}
       run: |
-        "${GITHUB_ACTION_PATH}/install-macos.sh"
-      if: runner.os == 'macOS'
+        if [ "${{ runner.os }}" = "macOS" ]; then
+          "${GITHUB_ACTION_PATH}/install-macos.sh"
+        fi
+        if [ "${{ runner.os }}" = "Linux" ]; then
+          INSTALL_PATH=/usr/local "${GITHUB_ACTION_PATH}/install-linux.sh"
+        fi
 
 branding:
   icon: 'book'
