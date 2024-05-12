@@ -8,6 +8,14 @@ SIV3D_IMAGE="ghcr.io/srz-zumix/setup-siv3d:${VERSION}"
 SIV3D=${SIV3D_INSTALLDIR}/siv3d_${VERSION}_linux
 INSTALL_PATH="${INSTALL_PATH:-./usr/local}"
 
+install_deps() {
+  echo '::group::📖 Install dependencies ...'
+  sudo apt-get update
+  sudo apt-get install -y --no-install-recommends \
+    libgif-dev
+  echo '::endgroup::'
+}
+
 install() {
   echo '::group::📖 Download Siv3D image ...'
   docker pull "${SIV3D_IMAGE}"
@@ -23,6 +31,8 @@ install() {
   ls "${INSTALL_PATH}/include"
   echo '::endgroup::'
 }
+
+install_deps
 
 install
 
