@@ -25,3 +25,5 @@ install() {
 }
 
 install
+
+echo "path=${SIV3D}" | tee -a "${GITHUB_OUTPUT:-/dev/null}"

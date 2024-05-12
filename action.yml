@@ -21,7 +21,7 @@ runs:
       env:
         INPUTS_VERSION: ${{ inputs.version }}
       with:
-        retry-max: 5
+        retry: 5
         interval: 30
         run: |
           "${GITHUB_ACTION_PATH}/resolve.sh"
