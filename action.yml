@@ -37,7 +37,7 @@ runs:
         INPUTS_VERSION: ${{ steps.resolve.outputs.version }}
       run: |
         if [ "${{ runner.os }}" = "macOS" ]; then
-          "${GITHUB_ACTION_PATH}/install-maos.sh"
+          "${GITHUB_ACTION_PATH}/install-macos.sh"
         fi
         if [ "${{ runner.os }}" = "Linux" ]; then
           INSTALL_PATH=/usr/local "${GITHUB_ACTION_PATH}/install-linux.sh"
