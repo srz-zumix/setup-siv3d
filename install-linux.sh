@@ -14,8 +14,8 @@ install() {
   echo '::endgroup::'
   echo '::group::📖 Copy Siv3D ...'
   docker run --rm -v "${SIV3D}:/siv3d" --entrypoint bash "${SIV3D_IMAGE}" -c "cp -r /usr/local/lib /siv3d/lib && cp -r /usr/local/include /siv3d/include"
-  cp -r "${SIV3D}/lib" "${INSTALL_PATH}/lib"
-  cp -r "${SIV3D}/include" "${INSTALL_PATH}/include"
+  cp -r "${SIV3D}/lib" "${INSTALL_PATH}/lib/"
+  cp -r "${SIV3D}/include" "${INSTALL_PATH}/include/"
   ls "${INSTALL_PATH}/lib"
   ls "${INSTALL_PATH}/include"
   echo '::endgroup::'
