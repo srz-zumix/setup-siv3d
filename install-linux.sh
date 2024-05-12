@@ -19,11 +19,13 @@ install_deps() {
     libcurl4-openssl-dev \
     libgtk-3-dev \
     libgif-dev \
+    libglu1-mesa-dev \
     libmpg123-dev \
     libopencv-dev \
     libopus-dev \
     libopusfile-dev \
     libsoundtouch-dev \
+    libturbojpeg0-dev \
     libvorbis-dev \
     libwebp-dev
   echo '::endgroup::'
