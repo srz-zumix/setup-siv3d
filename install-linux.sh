@@ -16,6 +16,7 @@ install() {
   docker run --rm -v "${SIV3D}:/siv3d" --entrypoint bash "${SIV3D_IMAGE}" -c "cp -r /usr/local/lib /siv3d/lib && cp -r /usr/local/include /siv3d/include"
   ls "${SIV3D}/lib"
   ls "${SIV3D}/include"
+  chown -R $(id -u):$(id -g) "${SIV3D}"
   cp -r "${SIV3D}" "${INSTALL_PATH}"
   ls "${INSTALL_PATH}/lib"
   ls "${INSTALL_PATH}/include"
