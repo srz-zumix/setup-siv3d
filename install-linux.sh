@@ -12,7 +12,14 @@ install_deps() {
   echo '::group::📖 Install dependencies ...'
   sudo apt-get update
   sudo apt-get install -y --no-install-recommends \
-    libgif-dev
+    libasound2-dev \
+    libavcodec-dev \
+    libavformat-dev \
+    libavutil-dev \
+    libcurl4-openssl-dev \
+    libgtk-3-dev \
+    libgif-dev \
+    libopencv-dev
   echo '::endgroup::'
 }
 
