@@ -10,6 +10,7 @@ inputs:
     type: boolean
   emscripten-version:
     description: 'Emscripten version.'
+    default: 'latest'
   github_token:
     description: 'GitHub token'
 
