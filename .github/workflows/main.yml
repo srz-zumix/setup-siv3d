@@ -23,3 +23,5 @@ jobs:
         web: ${{ matrix.web }}
     - run: |
         test -n "${{ steps.setup.outputs.version }}"
+    - run: |
+        ls ${{ steps.setup.outputs.path }}
