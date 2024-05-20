@@ -11,10 +11,15 @@ jobs:
         os: 
           - ubuntu-latest
           - macos-latest
+        web:
+          - false
+          - true
     steps:
     - name: clone
       uses: actions/checkout@v4
     - uses: ./
       id: setup
+      with:
+        web: ${{ matrix.web }}
     - run: |
         test -n "${{ steps.setup.outputs.version }}"
