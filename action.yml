@@ -45,7 +45,6 @@ runs:
       with:
         version: ${{ inputs.emscripten-version }}
       if: inputs.web
-    - name: 
     - name: Install Siv3D
       shell: bash
       id: install
