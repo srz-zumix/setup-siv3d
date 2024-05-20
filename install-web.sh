@@ -14,8 +14,8 @@ download() {
   curl -sSL -o "${SIV3D_TEMPDIR}/OpenSiv3D-wasm.tgz" "https://github.com/nokotan/OpenSiv3D/releases/download/${VERSION}/OpenSiv3D-wasm.tgz"
   echo '::endgroup::'
   echo '::group::📖 Unarchive Siv3D ...'
-  tar -xvf "${SIV3D_TEMPDIR}/OpenSiv3D-wasm.tgz" -d "${SIV3D_INSTALLDIR}"
-  mv "${SIV3D_INSTALLDIR}"/Package/ "${SIV3D}"
+  tar -xvf "${SIV3D_TEMPDIR}/OpenSiv3D-wasm.tgz"
+  mv Package "${SIV3D}"
   echo '::endgroup::'
 }
 
