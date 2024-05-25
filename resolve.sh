@@ -4,7 +4,11 @@ set -euo pipefail
 VERSION="${INPUTS_VERSION:-latest}"
 
 versions() {
-  curl -sSL https://api.github.com/repos/Siv3D/OpenSiv3D/tags | jq -r .[].name | sort -V
+  AUTH_OPTION=()
+  if [ -n "${INPUTS_GITHUB_TOKEN:-}" ]; then
+    AUTH_OPTION=(--header "Authorization: Bearer ${INPUTS_GITHUB_TOKEN:-}")
+  fi
+  curl "${AUTH_OPTION[@]}" -sSL "https://api.github.com/repos/${SIV3D_REPO}/tags" | jq -r .[].name | sort -V
 }
 
 resolve_version() {

@@ -10,10 +10,10 @@ SIV3D_ENV_VERSION_NUMBER="${VERSION#v}"
 SIV3D_ENV_VERSION_NAME="${SIV3D_ENV_VERSION_NUMBER//./_}"
 
 download() {
-  echo '::group::📖 Download siv3d ...'
+  echo '::group::📖 Download Siv3D ...'
   curl -sSL -o "${SIV3D_TEMPDIR}/siv3d_${VERSION}_macOS.zip" "https://siv3d.jp/downloads/Siv3D/siv3d_${VERSION}_macOS.zip"
   echo '::endgroup::'
-  echo '::group::📖 Unarchive siv3d ...'
+  echo '::group::📖 Unarchive Siv3D ...'
   unzip "${SIV3D_TEMPDIR}/siv3d_${VERSION}_macOS.zip" -d "${SIV3D_INSTALLDIR}"
   echo '::endgroup::'
 }

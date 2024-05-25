@@ -2,14 +2,28 @@ name: 'Setup Siv3D'
 description: 'This action sets up Siv3D'
 inputs:
   version:
-    description: 'siv3d version. [latest,vX.Y.Z]'
+    description: 'Siv3D version. [latest,vX.Y.Z]'
     default: 'latest'
+  web: 
+    description: 'setup Siv3D for web.'
+    default: false
+    type: boolean
+  emscripten-version:
+    description: 'Emscripten version.'
+    default: 'latest'
+  github_token:
+    description: |
+      The token used to authenticate when fetching infer version.
+      When running this action on github.com, the default value is sufficient.
+      When running on GHES, you can pass a personal access token for github.com if you are experiencing rate limiting.
+    default: ${{ github.server_url == 'https://github.com' && github.token || '' }}
+
 outputs:
   version:
-    description: 'installed siv3d version'
+    description: 'installed Siv3D version'
     value: ${{ steps.install.outputs.version }}
   path:
-    description: 'installed siv3d path'
+    description: 'installed Siv3D path'
     value: ${{ steps.install.outputs.path }}
 
 runs:
@@ -20,6 +34,9 @@ runs:
       id: resolve
       env:
         INPUTS_VERSION: ${{ inputs.version }}
+        INPUTS_GITHUB_TOKEN: ${{ inputs.github_token }}
+        GITHUB_TOKEN: ${{ github.token }}
+        SIV3D_REPO: ${{ inputs.web == 'true' && 'nokotan/OpenSiv3D' || 'Siv3D/OpenSiv3D' }}
       with:
         retry: 5
         interval: 30
@@ -30,17 +47,30 @@ runs:
         path: |
           ${{ steps.resolve.outputs.install-path }}
         key: ${{ runner.os }}-siv3d-${{ steps.resolve.outputs.version }}
+    - uses: mymindstorm/setup-emsdk@v14
+      with:
+        version: ${{ inputs.emscripten-version }}
+      if: inputs.web == 'true'
     - name: Install Siv3D
       shell: bash
       id: install
       env:
         INPUTS_VERSION: ${{ steps.resolve.outputs.version }}
+        INPUTS_GITHUB_TOKEN: ${{ inputs.github_token }}
+        GITHUB_TOKEN: ${{ github.token }}
+        SIV3D_REPO: ${{ inputs.web == 'true' && 'nokotan/OpenSiv3D' || 'Siv3D/OpenSiv3D' }}
       run: |
+        if [ "${{ inputs.web }}" = "true" ]; then
+          "${GITHUB_ACTION_PATH}/install-web.sh"
+          exit 0
+        fi
         if [ "${{ runner.os }}" = "macOS" ]; then
           "${GITHUB_ACTION_PATH}/install-macos.sh"
+          exit 0
         fi
         if [ "${{ runner.os }}" = "Linux" ]; then
           INSTALL_PATH=/usr/local "${GITHUB_ACTION_PATH}/install-linux.sh"
+          exit 0
         fi
 
 branding:
