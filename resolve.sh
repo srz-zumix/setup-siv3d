@@ -7,10 +7,6 @@ versions() {
   AUTH_OPTION=()
   if [ -n "${INPUTS_GITHUB_TOKEN:-}" ]; then
     AUTH_OPTION=(--header "Authorization: Bearer ${INPUTS_GITHUB_TOKEN:-}")
-  else
-    if [ "${GITHUB_SERVER_URL}" == "https://github.com" ]; then
-      AUTH_OPTION=(--header "Authorization: Bearer ${GITHUB_TOKEN:-}")
-    fi
   fi
   curl "${AUTH_OPTION[@]}" -sSL "https://api.github.com/repos/${SIV3D_REPO}/tags" | jq -r .[].name | sort -V
 }
