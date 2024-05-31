@@ -4,6 +4,13 @@ inputs:
   version:
     description: 'siv3d version. [latest,vX.Y.Z]'
     default: 'latest'
+  github_token:
+    description: |
+      The token used to authenticate when fetching infer version.
+      When running this action on github.com, the default value is sufficient.
+      When running on GHES, you can pass a personal access token for github.com if you are experiencing rate limiting.
+    default: ${{ github.server_url == 'https://github.com' && github.token || '' }}
+
 outputs:
   version:
     description: 'installed siv3d version'
@@ -20,6 +27,7 @@ runs:
       id: resolve
       env:
         INPUTS_VERSION: ${{ inputs.version }}
+        INPUTS_GITHUB_TOKEN: ${{ inputs.github_token }}
       with:
         retry: 5
         interval: 30
@@ -35,6 +43,7 @@ runs:
       id: install
       env:
         INPUTS_VERSION: ${{ steps.resolve.outputs.version }}
+        INPUTS_GITHUB_TOKEN: ${{ inputs.github_token }}
       run: |
         if [ "${{ runner.os }}" = "macOS" ]; then
           "${GITHUB_ACTION_PATH}/install-macos.sh"
