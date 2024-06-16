@@ -38,7 +38,7 @@ install() {
   docker pull "${SIV3D_IMAGE}"
   echo '::endgroup::'
   echo '::group::📖 Copy Siv3D ...'
-  docker run --rm -v "${SIV3D}:/siv3d" --entrypoint bash "${SIV3D_IMAGE}" -c "cp -r /usr/local/lib /siv3d/lib && cp -r /usr/local/include/Siv3D /siv3d/include"
+  docker run --rm -v "${SIV3D}:/siv3d" --entrypoint bash "${SIV3D_IMAGE}" -c "cp -r /usr/local/lib /siv3d/lib && cp -r /usr/local/include/Siv3D/ /siv3d/include"
   ls -l "${SIV3D}/lib"
   ls -l "${SIV3D}/include"
   sudo chown -R "$(id -u):$(id -g)" "${SIV3D}"
