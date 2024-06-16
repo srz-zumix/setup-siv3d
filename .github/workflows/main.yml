@@ -22,3 +22,9 @@ jobs:
       run: |
         test -n "${{ steps.setup.outputs.version }}"
         test -n "${SIV3D}"
+    - name: Test Path
+      shell: bash
+      run: |
+        test -f "${SIV3D}/include/Siv3D.hpp"
+        test -d "${SIV3D}/include/Siv3D"
+        test -d "${SIV3D}/include/ThirdParty"
