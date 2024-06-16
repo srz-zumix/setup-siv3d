@@ -17,5 +17,8 @@ jobs:
       uses: actions/checkout@v4
     - uses: ./
       id: setup
-    - run: |
+    - name: Test
+      shell: bash
+      run: |
         test -n "${{ steps.setup.outputs.version }}"
+        test -n "${SIV3D}"

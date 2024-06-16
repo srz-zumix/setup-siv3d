@@ -4,8 +4,10 @@ set -euox pipefail
 source "${GITHUB_ACTION_PATH:-.}/resolve.sh"
 
 mkdir -p "${SIV3D_INSTALLDIR}"
+SIV3D_ENV_VERSION_NUMBER="${VERSION#v}"
+SIV3D_ENV_VERSION_NAME="${SIV3D_ENV_VERSION_NUMBER//./_}"
 SIV3D_IMAGE="ghcr.io/srz-zumix/setup-siv3d:${VERSION}"
-SIV3D=${SIV3D_INSTALLDIR}/siv3d_${VERSION}_linux
+SIV3D="${SIV3D_INSTALLDIR}/siv3d_${VERSION}_linux"
 INSTALL_PATH="${INSTALL_PATH:-./usr/local}"
 
 install_deps() {
@@ -50,5 +52,11 @@ install() {
 install_deps
 
 install
+
+{
+  echo "SIV3D=${SIV3D}"
+  echo "SIV3D_${SIV3D_ENV_VERSION_NAME}=${SIV3D}"
+} >> "${GITHUB_ENV:-/dev/null}"
+
 
 echo "path=${SIV3D}" | tee -a "${GITHUB_OUTPUT:-/dev/null}"
