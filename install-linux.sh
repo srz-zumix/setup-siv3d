@@ -42,7 +42,7 @@ install() {
   ls -l "${SIV3D}/lib"
   ls -l "${SIV3D}/include"
   sudo chown -R "$(id -u):$(id -g)" "${SIV3D}"
-  sudo cp -RT "${SIV3D}/lib" "${INSTALL_PATH}"
+  sudo cp -RT "${SIV3D}/lib/" "${INSTALL_PATH}/lib/"
   sudo cp -RT "${SIV3D}/include/" "${INSTALL_PATH}/include/Siv3D"
   ls "${INSTALL_PATH}/lib"
   ls "${INSTALL_PATH}/include/Siv3D"
