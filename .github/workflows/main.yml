@@ -19,3 +19,4 @@ jobs:
       id: setup
     - run: |
         test -n "${{ steps.setup.outputs.version }}"
+        test -n "${SIV3D}"
