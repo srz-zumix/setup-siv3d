@@ -23,7 +23,7 @@ runs:
   using: 'composite'
   steps:
     - name: Resolve version
-      uses: srz-zumix/retry-run-action@v0
+      uses: srz-zumix/retry-run-action@v1
       id: resolve
       env:
         INPUTS_VERSION: ${{ inputs.version }}
